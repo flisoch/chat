@@ -1,0 +1,10 @@
+
+zuul:
+  prefix: /api
+  routes:
+    user:
+      path: /cat/**
+      serviceId: CAT
+
+
+
