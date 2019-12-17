@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="wschat" />
-        <module name="zuul" />
         <module name="ChatPagesService" />
         <module name="auth" />
         <module name="eureka" />
         <module name="cat" />
+        <module name="zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

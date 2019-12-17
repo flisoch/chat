@@ -4,23 +4,22 @@ import com.example.jsockets.accounts.Account;
 import com.example.jsockets.accounts.AccountDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.security.Key;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class JwtAuthentication implements Authentication {
-    private static Key key = Keys.hmacShaKeyFor("This must have 256+ bits! (32+ chars)".getBytes());
+
 
     private Account account;
     private String token;
 
     public JwtAuthentication(String jwt) {
         this.token = jwt;
-        Claims body = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
+        Claims body = Jwts.parser().setSigningKey("key").parseClaimsJws(jwt).getBody();
         Long id = Long.parseLong(body.get("id", String.class));
         String username = body.get("username", String.class);
         this.account = new Account(id, username);
@@ -31,7 +30,7 @@ public class JwtAuthentication implements Authentication {
         LinkedHashMap<String, Object> claims = new LinkedHashMap<>(account.toMap());
         token = Jwts.builder()
                 .addClaims(claims)
-                .signWith(key)
+                .signWith(SignatureAlgorithm.HS512, "key")
                 .compact();
     }
 
