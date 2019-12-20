@@ -20,7 +20,6 @@
 
         <module>zuul</module>
         <module>eureka</module>
-        <module>stompChat</module>
         <module>ChatPagesService</module>
         <module>cat</module>
         <module>wschat</module>
